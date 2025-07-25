@@ -209,15 +209,15 @@ export default function EnhancedEcommerceHeader() {
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <Phone className="w-4 h-4" />
-              <span>+1 (555) 123-4567</span>
+              <span>+92 3400050708</span>
             </div>
             <div className="flex items-center space-x-2">
               <Mail className="w-4 h-4" />
-              <span>support@luxe.com</span>
+              <span>talhabajwa1622@gmail.com</span>
             </div>
             <div className="hidden md:flex items-center space-x-2">
               <MapPin className="w-4 h-4" />
-              <span>Store Locator</span>
+              <span>online shopping</span>
             </div>
           </div>
           <div className="flex items-center space-x-4">
