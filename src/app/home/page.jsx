@@ -176,7 +176,7 @@ export default function EcommerceHomePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden ">
         <div className="absolute inset-0">
           <div className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentSlide].bg} opacity-90 transition-all duration-1000`} />
           <div className="absolute inset-0 bg-black/20" />
