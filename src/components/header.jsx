@@ -369,7 +369,7 @@ export default function EnhancedEcommerceHeader() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <a href="/#  " className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>My Profile</a>
+                      <a href="/  " className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>My Profile</a>
                       <a href="/order" className={`block px-3 py-2 mt-20 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>order history</a>
                       <a href="/" className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>Settings</a>
                       <hr className={`my-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
