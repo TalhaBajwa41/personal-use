@@ -90,7 +90,7 @@ export default function EcommerceHomePage() {
     };
   }, []);
 
-  const navItems = ['Home', 'Shop', 'Categories', 'Deals', 'About', 'Contact'];
+  const navItems = ['Home', 'Categories', 'Deals', 'About', 'Contact'];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">

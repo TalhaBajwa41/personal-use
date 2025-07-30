@@ -181,8 +181,8 @@ export default function EnhancedEcommerceHeader() {
 
   const navItems = [
     { name: 'Home', href: '/', hasDropdown: false, badge: null },
-    { name: 'Shop', href: '/shop', hasDropdown: true, badge: 'Hot' },
-    { name: 'Categories', href: '/categories', hasDropdown: true, badge: null },
+    
+    { name: 'Categories', href: '/categories', hasDropdown: true, badge: 'Hot' },
     { name: 'Deals', href: '/deals', hasDropdown: false, badge: 'Sale' },
     { name: 'VIP Club', href: '/vip', hasDropdown: false, badge: 'New' },
     { name: 'About', href: '/about', hasDropdown: false, badge: null },
@@ -239,12 +239,14 @@ export default function EnhancedEcommerceHeader() {
         </div>
       </div>
 
-      {/* Enhanced Header with Position Relative */}
-      <header className={`relative  w-full z-50 transition-all duration-300 ${
+      {/* Enhanced Header - Now Fixed Position */}
+      <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         scrolled 
           ? `${isDarkMode ? 'bg-black/90' : 'bg-white/90'} backdrop-blur-md py-2 shadow-lg border-b ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}` 
           : 'bg-transparent py-4'
-      }`}>
+      }`}
+      style={{ top: scrolled ? '0' : '40px' }} // Adjust for top bar height
+      >
         <div className="relative container mx-auto px-6">
           <div className="relative flex items-center justify-between">
             {/* Enhanced Logo */}
@@ -369,11 +371,11 @@ export default function EnhancedEcommerceHeader() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <a href="/  " className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>My Profile</a>
-                      <a href="/order" className={`block px-3 py-2 mt-20 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>order history</a>
-                      <a href="/" className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>Settings</a>
+                      <a href="/profile" className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>My Profile</a>
+                      <a href="/order" className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>Order History</a>
+                      <a href="/setting" className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200`}>Settings</a>
                       <hr className={`my-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
-                      <a href="#" className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200 text-red-400`}>Sign Out</a>
+                      <a href="/signout" className={`block px-3 py-2 rounded-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors duration-200 text-red-400`}>Sign Out</a>
                     </div>
                   </div>
                 </div>
@@ -403,7 +405,7 @@ export default function EnhancedEcommerceHeader() {
         
         {/* Enhanced Search Bar */}
         {isSearchOpen && (
-          <div className={`relative ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-md border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
+          <div className={`absolute top-full left-0 right-0 ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-md border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
             <div className="relative container mx-auto px-6 py-4">
               <div className="relative max-w-2xl mx-auto">
                 <form onSubmit={handleSearch}>
@@ -632,212 +634,215 @@ export default function EnhancedEcommerceHeader() {
         </div>
       </div>
 
-      {/* Enhanced Hero Section with Position Relative */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0">
-          <div className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentSlide].bg} opacity-90 transition-all duration-1000`} />
-          <div className="absolute inset-0 bg-black/20" />
-          
-          {/* Enhanced Floating Elements with Position Relative */}
-          <div className="relative">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse" />
-            <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl animate-ping" style={{ animationDuration: '3s' }} />
-            <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-pink-500/10 rounded-full blur-lg animate-bounce" style={{ animationDelay: '1s' }} />
-            <div className="absolute top-1/3 right-1/3 w-16 h-16 bg-blue-500/10 rounded-full blur-lg animate-pulse" style={{ animationDelay: '2s' }} />
-            <div className="absolute top-2/3 left-1/2 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl animate-spin" style={{ animationDuration: '10s' }} />
-          </div>
-          
-          {/* Video Background Simulation */}
-          {heroSlides[currentSlide].video && (
-            <div className="absolute inset-0 opacity-30">
-              <div className="w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse" />
-            </div>
-          )}
-        </div>
-
-        {/* Video Controls */}
-        {heroSlides[currentSlide].video && (
-          <div className="absolute top-6 right-6 flex space-x-2 z-20">
-            <button
-              onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-              className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300"
-            >
-              {isVideoPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-            </button>
-            <button
-              onClick={() => setIsMuted(!isMuted)}
-              className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300"
-            >
-              {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-            </button>
-          </div>
-        )}
-
-        {/* Enhanced Content with Position Relative */}
-        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          <div className="animate-fade-in-up">
-            {/* Enhanced Badge */}
-            <div className="relative inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm text-sm font-medium mb-6 animate-fade-in-up border border-white/30">
-              <div className="absolute -left-2 -top-2 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
-              <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-              {heroSlides[currentSlide].badge}
-              <Sparkles className="w-4 h-4 ml-2" />
+      {/* MAIN CONTENT AREA - Added padding-top to account for fixed header */}
+      <div className="pt-32">
+        {/* Enhanced Hero Section */}
+        <section className="relative h-screen flex items-center justify-center overflow-hidden">
+          {/* Animated Background */}
+          <div className="absolute inset-0">
+            <div className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentSlide].bg} opacity-90 transition-all duration-1000`} />
+            <div className="absolute inset-0 bg-black/20" />
+            
+            {/* Enhanced Floating Elements */}
+            <div className="relative">
+              <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse" />
+              <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl animate-ping" style={{ animationDuration: '3s' }} />
+              <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-pink-500/10 rounded-full blur-lg animate-bounce" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-1/3 right-1/3 w-16 h-16 bg-blue-500/10 rounded-full blur-lg animate-pulse" style={{ animationDelay: '2s' }} />
+              <div className="absolute top-2/3 left-1/2 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl animate-spin" style={{ animationDuration: '10s' }} />
             </div>
             
-            <h1 className="relative text-5xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent leading-tight">
-              {heroSlides[currentSlide].title}
-              <div className="absolute -top-4 -right-4 w-12 h-12 bg-yellow-400 rounded-full opacity-20 animate-ping"></div>
-            </h1>
-            <p className="text-xl lg:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-              {heroSlides[currentSlide].subtitle}
-            </p>
-            
-            {/* Countdown Timer */}
-            {heroSlides[currentSlide].countdown && (
-              <div className="relative flex justify-center mb-8 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-                <div className="flex space-x-4 bg-black/30 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">24</div>
-                    <div className="text-xs text-gray-300">HOURS</div>
-                  </div>
-                  <div className="text-white text-2xl">:</div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">15</div>
-                    <div className="text-xs text-gray-300">MINS</div>
-                  </div>
-                  <div className="text-white text-2xl">:</div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">30</div>
-                    <div className="text-xs text-gray-300">SECS</div>
-                  </div>
-                </div>
+            {/* Video Background Simulation */}
+            {heroSlides[currentSlide].video && (
+              <div className="absolute inset-0 opacity-30">
+                <div className="w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse" />
               </div>
             )}
-            
-            <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 flex items-center space-x-2 overflow-hidden">
-                <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                <span className="relative">{heroSlides[currentSlide].cta}</span>
-                <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+          </div>
+
+          {/* Video Controls */}
+          {heroSlides[currentSlide].video && (
+            <div className="absolute top-6 right-6 flex space-x-2 z-20">
+              <button
+                onClick={() => setIsVideoPlaying(!isVideoPlaying)}
+                className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300"
+              >
+                {isVideoPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
               </button>
+              <button
+                onClick={() => setIsMuted(!isMuted)}
+                className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300"
+              >
+                {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+              </button>
+            </div>
+          )}
+
+          {/* Enhanced Content */}
+          <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+            <div className="animate-fade-in-up">
+              {/* Enhanced Badge */}
+              <div className="relative inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm text-sm font-medium mb-6 animate-fade-in-up border border-white/30">
+                <div className="absolute -left-2 -top-2 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
+                <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
+                {heroSlides[currentSlide].badge}
+                <Sparkles className="w-4 h-4 ml-2" />
+              </div>
               
-              <button className="relative px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm overflow-hidden group">
-                <div className="absolute inset-0 bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                <span className="relative">{heroSlides[currentSlide].secondaryCta}</span>
-              </button>
-            </div>
-
-            {/* Enhanced Quick Features */}
-            <div className="relative grid grid-cols-2 lg:grid-cols-6 gap-6 mb-12 animate-fade-in-up" style={{ animationDelay: '500ms' }}>
-              {quickLinks.map((feature, index) => (
-                <div key={feature.name} className="relative flex flex-col items-center p-4 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105 cursor-pointer group border border-white/20">
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
-                  <feature.icon className={`w-8 h-8 mb-2 ${feature.color} group-hover:scale-110 transition-transform duration-300`} />
-                  <span className="text-sm font-medium text-center">{feature.name}</span>
-                  <span className="text-xs text-gray-400 mt-1">{feature.count}</span>
+              <h1 className="relative text-5xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent leading-tight">
+                {heroSlides[currentSlide].title}
+                <div className="absolute -top-4 -right-4 w-12 h-12 bg-yellow-400 rounded-full opacity-20 animate-ping"></div>
+              </h1>
+              <p className="text-xl lg:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+                {heroSlides[currentSlide].subtitle}
+              </p>
+              
+              {/* Countdown Timer */}
+              {heroSlides[currentSlide].countdown && (
+                <div className="relative flex justify-center mb-8 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+                  <div className="flex space-x-4 bg-black/30 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white">24</div>
+                      <div className="text-xs text-gray-300">HOURS</div>
+                    </div>
+                    <div className="text-white text-2xl">:</div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white">15</div>
+                      <div className="text-xs text-gray-300">MINS</div>
+                    </div>
+                    <div className="text-white text-2xl">:</div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white">30</div>
+                      <div className="text-xs text-gray-300">SECS</div>
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Enhanced Stats with Position Relative */}
-            <div className="relative grid grid-cols-3 gap-8 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-              <div className="relative text-center group">
-                <div className="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
-                <div className="relative text-3xl font-bold text-white mb-2 flex items-center justify-center">
-                  <TrendingUp className="w-8 h-8 text-green-400 mr-2 animate-pulse" />
-                  10K+
-                </div>
-                <div className="relative text-gray-400">Products</div>
-              </div>
-              <div className="relative text-center group">
-                <div className="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
-                <div className="relative text-3xl font-bold text-white mb-2 flex items-center justify-center">
-                  <Star className="w-8 h-8 text-yellow-400 mr-2 animate-pulse" />
-                  4.9
-                </div>
-                <div className="relative text-gray-400">Rating</div>
-              </div>
-              <div className="relative text-center group">
-                <div className="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
-                <div className="relative text-3xl font-bold text-white mb-2 flex items-center justify-center">
-                  <Shield className="w-8 h-8 text-blue-400 mr-2 animate-pulse" />
-                  50K+
-                </div>
-                <div className="relative text-gray-400">Happy Customers</div>
-              </div>
-            </div>
-
-            {/* Social Proof Bar */}
-            <div className="relative mt-12 flex justify-center items-center space-x-8 animate-fade-in-up" style={{ animationDelay: '700ms' }}>
-              <div className="flex items-center space-x-2 text-sm text-gray-300">
-                <Users className="w-4 h-4" />
-                <span>{liveStats.onlineUsers.toLocaleString()} people shopping now</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-300">
-                <Award className="w-4 h-4 text-yellow-400" />
-                <span>Trusted by millions</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-300">
-                <Shield className="w-4 h-4 text-green-400" />
-                <span>100% Secure</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Enhanced Slide Indicators with Position Relative */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              className={`relative h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white w-8' : 'bg-white/50 w-3'
-              } hover:bg-white/80`}
-              onClick={() => setCurrentSlide(index)}
-            >
-              {index === currentSlide && (
-                <div className="absolute inset-0 bg-white rounded-full animate-pulse"></div>
               )}
-            </button>
-          ))}
-        </div>
+              
+              <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+                <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 flex items-center space-x-2 overflow-hidden">
+                  <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  <span className="relative">{heroSlides[currentSlide].cta}</span>
+                  <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+                
+                <button className="relative px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm overflow-hidden group">
+                  <div className="absolute inset-0 bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  <span className="relative">{heroSlides[currentSlide].secondaryCta}</span>
+                </button>
+              </div>
 
-        {/* Enhanced Scroll Indicator */}
-        <div className="absolute bottom-8 right-8 animate-bounce group cursor-pointer">
-          <div className="relative w-6 h-10 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white transition-colors duration-300">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse group-hover:bg-white"></div>
+              {/* Enhanced Quick Features */}
+              <div className="relative grid grid-cols-2 lg:grid-cols-6 gap-6 mb-12 animate-fade-in-up" style={{ animationDelay: '500ms' }}>
+                {quickLinks.map((feature, index) => (
+                  <div key={feature.name} className="relative flex flex-col items-center p-4 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105 cursor-pointer group border border-white/20">
+                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+                    <feature.icon className={`w-8 h-8 mb-2 ${feature.color} group-hover:scale-110 transition-transform duration-300`} />
+                    <span className="text-sm font-medium text-center">{feature.name}</span>
+                    <span className="text-xs text-gray-400 mt-1">{feature.count}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Enhanced Stats */}
+              <div className="relative grid grid-cols-3 gap-8 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+                <div className="relative text-center group">
+                  <div className="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="relative text-3xl font-bold text-white mb-2 flex items-center justify-center">
+                    <TrendingUp className="w-8 h-8 text-green-400 mr-2 animate-pulse" />
+                    10K+
+                  </div>
+                  <div className="relative text-gray-400">Products</div>
+                </div>
+                <div className="relative text-center group">
+                  <div className="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="relative text-3xl font-bold text-white mb-2 flex items-center justify-center">
+                    <Star className="w-8 h-8 text-yellow-400 mr-2 animate-pulse" />
+                    4.9
+                  </div>
+                  <div className="relative text-gray-400">Rating</div>
+                </div>
+                <div className="relative text-center group">
+                  <div className="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  <div className="relative text-3xl font-bold text-white mb-2 flex items-center justify-center">
+                    <Shield className="w-8 h-8 text-blue-400 mr-2 animate-pulse" />
+                    50K+
+                  </div>
+                  <div className="relative text-gray-400">Happy Customers</div>
+                </div>
+              </div>
+
+              {/* Social Proof Bar */}
+              <div className="relative mt-12 flex justify-center items-center space-x-8 animate-fade-in-up" style={{ animationDelay: '700ms' }}>
+                <div className="flex items-center space-x-2 text-sm text-gray-300">
+                  <Users className="w-4 h-4" />
+                  <span>{liveStats.onlineUsers.toLocaleString()} people shopping now</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-gray-300">
+                  <Award className="w-4 h-4 text-yellow-400" />
+                  <span>Trusted by millions</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-gray-300">
+                  <Shield className="w-4 h-4 text-green-400" />
+                  <span>100% Secure</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="text-xs text-white/70 text-center mt-2 group-hover:text-white transition-colors duration-300">Scroll</div>
-        </div>
 
-        {/* Enhanced Side Navigation Arrows */}
-        <button 
-          className="absolute left-8 top-1/2 transform -translate-y-1/2 p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group"
-          onClick={() => setCurrentSlide(currentSlide === 0 ? heroSlides.length - 1 : currentSlide - 1)}
-        >
-          <ArrowRight className="w-6 h-6 rotate-180 group-hover:translate-x-1 transition-transform duration-300" />
-        </button>
-        <button 
-          className="absolute right-8 top-1/2 transform -translate-y-1/2 p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group"
-          onClick={() => setCurrentSlide((currentSlide + 1) % heroSlides.length)}
-        >
-          <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
-        </button>
+          {/* Enhanced Slide Indicators */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            {heroSlides.map((_, index) => (
+              <button
+                key={index}
+                className={`relative h-3 rounded-full transition-all duration-300 ${
+                  index === currentSlide ? 'bg-white w-8' : 'bg-white/50 w-3'
+                } hover:bg-white/80`}
+                onClick={() => setCurrentSlide(index)}
+              >
+                {index === currentSlide && (
+                  <div className="absolute inset-0 bg-white rounded-full animate-pulse"></div>
+                )}
+              </button>
+            ))}
+          </div>
 
-        {/* Share & Quick Actions */}
-        <div className="absolute top-1/2 left-6 transform -translate-y-1/2 flex flex-col space-y-3">
-          <button className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group">
-            <Share2 className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+          {/* Enhanced Scroll Indicator */}
+          <div className="absolute bottom-8 right-8 animate-bounce group cursor-pointer">
+            <div className="relative w-6 h-10 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white transition-colors duration-300">
+              <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse group-hover:bg-white"></div>
+            </div>
+            <div className="text-xs text-white/70 text-center mt-2 group-hover:text-white transition-colors duration-300">Scroll</div>
+          </div>
+
+          {/* Enhanced Side Navigation Arrows */}
+          <button 
+            className="absolute left-8 top-1/2 transform -translate-y-1/2 p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group"
+            onClick={() => setCurrentSlide(currentSlide === 0 ? heroSlides.length - 1 : currentSlide - 1)}
+          >
+            <ArrowRight className="w-6 h-6 rotate-180 group-hover:translate-x-1 transition-transform duration-300" />
           </button>
-          <button className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group">
-            <Camera className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+          <button 
+            className="absolute right-8 top-1/2 transform -translate-y-1/2 p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group"
+            onClick={() => setCurrentSlide((currentSlide + 1) % heroSlides.length)}
+          >
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
           </button>
-          <button className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group">
-            <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" />
-          </button>
-        </div>
-      </section>
+
+          {/* Share & Quick Actions */}
+          <div className="absolute top-1/2 left-6 transform -translate-y-1/2 flex flex-col space-y-3">
+            <button className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group">
+              <Share2 className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+            </button>
+            <button className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group">
+              <Camera className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+            </button>
+            <button className="p-3 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110 group">
+              <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" />
+            </button>
+          </div>
+        </section>
+      </div>
 
       <style jsx>{`
         @keyframes fade-in-up {
