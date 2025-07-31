@@ -93,9 +93,9 @@ export default function EcommerceHomePage() {
   const navItems = ['Home', 'Categories', 'Deals', 'About', 'Contact'];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className={`fixed w-full z-50 transition-all duration-300 ${
+      <header className={` w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-4'
       }`}>
         <div className="container mx-auto px-6">
@@ -151,7 +151,7 @@ export default function EcommerceHomePage() {
       </header>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
+      <div className={` inset-0 z-40 lg:hidden transition-all duration-300 ${
         isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
       }`}>
         <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
@@ -177,7 +177,7 @@ export default function EcommerceHomePage() {
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden ">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 pt-72">
           <div className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentSlide].bg} opacity-90 transition-all duration-1000`} />
           <div className="absolute inset-0 bg-black/20" />
           <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse" />

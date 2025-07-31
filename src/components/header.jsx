@@ -181,7 +181,6 @@ export default function EnhancedEcommerceHeader() {
 
   const navItems = [
     { name: 'Home', href: '/', hasDropdown: false, badge: null },
-    
     { name: 'Categories', href: '/categories', hasDropdown: true, badge: 'Hot' },
     { name: 'Deals', href: '/deals', hasDropdown: false, badge: 'Sale' },
     { name: 'VIP Club', href: '/vip', hasDropdown: false, badge: 'New' },
@@ -239,14 +238,12 @@ export default function EnhancedEcommerceHeader() {
         </div>
       </div>
 
-      {/* Enhanced Header - Now Fixed Position */}
-      <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+      {/* Enhanced Header - Now Block Display */}
+      <header className={`relative w-full z-30 transition-all duration-300 ${
         scrolled 
-          ? `${isDarkMode ? 'bg-black/90' : 'bg-white/90'} backdrop-blur-md py-2 shadow-lg border-b ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}` 
-          : 'bg-transparent py-4'
-      }`}
-      style={{ top: scrolled ? '0' : '40px' }} // Adjust for top bar height
-      >
+          ? `${isDarkMode ? 'bg-black/90' : 'bg-white/90'} backdrop-blur-md shadow-lg border-b ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}` 
+          : 'bg-transparent'
+      } py-4`}>
         <div className="relative container mx-auto px-6">
           <div className="relative flex items-center justify-between">
             {/* Enhanced Logo */}
@@ -405,7 +402,7 @@ export default function EnhancedEcommerceHeader() {
         
         {/* Enhanced Search Bar */}
         {isSearchOpen && (
-          <div className={`absolute top-full left-0 right-0 ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-md border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
+          <div className={`relative w-full ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-md border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
             <div className="relative container mx-auto px-6 py-4">
               <div className="relative max-w-2xl mx-auto">
                 <form onSubmit={handleSearch}>
@@ -473,7 +470,7 @@ export default function EnhancedEcommerceHeader() {
         {/* Mega Menu */}
         {showMegaMenu && (
           <div 
-            className={`absolute top-full left-0 right-0 ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-md border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} z-40`}
+            className={`relative w-full ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-md border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} z-40`}
             onMouseEnter={() => setShowMegaMenu(true)}
             onMouseLeave={() => setShowMegaMenu(false)}
           >
@@ -634,8 +631,8 @@ export default function EnhancedEcommerceHeader() {
         </div>
       </div>
 
-      {/* MAIN CONTENT AREA - Added padding-top to account for fixed header */}
-      <div className="pt-32">
+      {/* MAIN CONTENT AREA */}
+      <div>
         {/* Enhanced Hero Section */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           {/* Animated Background */}
