@@ -95,16 +95,16 @@ export default function EcommerceHomePage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className={` w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-4'
+      <header className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-3 md:py-4'
       }`}>
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
-                <Zap className="w-6 h-6 text-white" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                <Zap className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 LUXE
               </span>
             </div>
@@ -122,20 +122,20 @@ export default function EcommerceHomePage() {
               ))}
             </nav>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <button className="p-2 hover:bg-white/10 rounded-full transition-all duration-300 hover:scale-110">
-                <Search className="w-5 h-5" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button className="p-2 hover:bg-white/10 rounded-full transition-all duration-300 hover:scale-110 relative">
-                <Heart className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-xs flex items-center justify-center animate-pulse">2</span>
+                <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full text-xs flex items-center justify-center animate-pulse">2</span>
               </button>
-              <button className="p-2 hover:bg-white/10 rounded-full transition-all duration-300 hover:scale-110">
+              <button className="p-2 hover:bg-white/10 rounded-full transition-all duration-300 hover:scale-110 hidden sm:block">
                 <User className="w-5 h-5" />
               </button>
               <button className="relative p-2 hover:bg-white/10 rounded-full transition-all duration-300 hover:scale-110">
-                <ShoppingCart className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs flex items-center justify-center font-semibold animate-bounce">
+                <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs flex items-center justify-center font-semibold animate-bounce">
                   {cartCount}
                 </span>
               </button>
@@ -151,11 +151,11 @@ export default function EcommerceHomePage() {
       </header>
 
       {/* Mobile Menu */}
-      <div className={` inset-0 z-40 lg:hidden transition-all duration-300 ${
+      <div className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
         isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
       }`}>
         <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
-        <div className={`absolute right-0 top-0 h-full w-80 bg-gray-900 transform transition-transform duration-300 ${
+        <div className={`absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-gray-900 transform transition-transform duration-300 ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           <div className="p-6 pt-20">
@@ -176,60 +176,60 @@ export default function EcommerceHomePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden ">
-        <div className="absolute inset-0 pt-72">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 pt-16 sm:pt-20 md:pt-72">
           <div className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentSlide].bg} opacity-90 transition-all duration-1000`} />
           <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl animate-ping" style={{ animationDuration: '3s' }} />
-          <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-pink-500/10 rounded-full blur-lg animate-bounce" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-16 h-16 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-xl animate-pulse" />
+          <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-24 h-24 sm:w-48 sm:h-48 bg-purple-500/10 rounded-full blur-2xl animate-ping" style={{ animationDuration: '3s' }} />
+          <div className="absolute top-1/2 left-1/4 w-10 h-10 sm:w-20 sm:h-20 bg-pink-500/10 rounded-full blur-lg animate-bounce" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
           <div className="animate-fade-in-up">
-            <h1 className="text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent leading-tight">
               {heroSlides[currentSlide].title}
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-300 mb-8 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8 animate-fade-in-up px-2" style={{ animationDelay: '200ms' }}>
               {heroSlides[currentSlide].subtitle}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-              <button className="group px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 flex items-center space-x-2">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-fade-in-up px-2" style={{ animationDelay: '400ms' }}>
+              <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-base sm:text-lg hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2">
                 <span>{heroSlides[currentSlide].cta}</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
-              <button className="px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105">
+              <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 rounded-full font-semibold text-base sm:text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105">
                 View Collection
               </button>
             </div>
 
-            <div className="grid grid-cols-3 gap-8 mt-16 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+            <div className="grid grid-cols-3 gap-4 sm:gap-8 mt-8 sm:mt-16 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">10K+</div>
-                <div className="text-gray-400">Products</div>
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2">10K+</div>
+                <div className="text-sm sm:text-base text-gray-400">Products</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2 flex items-center justify-center">
-                  <Star className="w-8 h-8 text-yellow-400 mr-2" />
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2 flex items-center justify-center">
+                  <Star className="w-5 h-5 sm:w-6 md:w-8 sm:h-6 md:h-8 text-yellow-400 mr-1 sm:mr-2" />
                   4.9
                 </div>
-                <div className="text-gray-400">Rating</div>
+                <div className="text-sm sm:text-base text-gray-400">Rating</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">50K+</div>
-                <div className="text-gray-400">Customers</div>
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2">50K+</div>
+                <div className="text-sm sm:text-base text-gray-400">Customers</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {heroSlides.map((_, index) => (
             <button
               key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'bg-white w-4 sm:w-8' : 'bg-white/50'
               }`}
               onClick={() => setCurrentSlide(index)}
             />
@@ -241,12 +241,12 @@ export default function EcommerceHomePage() {
       <section 
         id="features" 
         data-animate 
-        className={`py-20 bg-gray-900/50 transition-all duration-1000 ${
+        className={`py-12 sm:py-16 md:py-20 bg-gray-900/50 transition-all duration-1000 ${
           visibleSections.has('features') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {[
               { icon: Truck, title: "Free Shipping", desc: "On orders over $100" },
               { icon: Shield, title: "Secure Payment", desc: "100% protected" },
@@ -258,11 +258,11 @@ export default function EcommerceHomePage() {
                 className="text-center group cursor-pointer transform hover:scale-105 transition-all duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:rotate-12 transition-transform duration-300">
-                  <feature.icon className="w-8 h-8 text-white" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:rotate-12 transition-transform duration-300">
+                  <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>
-                <p className="text-gray-400">{feature.desc}</p>
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2 text-white">{feature.title}</h3>
+                <p className="text-sm sm:text-base text-gray-400">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -273,30 +273,30 @@ export default function EcommerceHomePage() {
       <section 
         id="categories" 
         data-animate 
-        className={`py-20 transition-all duration-1000 ${
+        className={`py-12 sm:py-16 md:py-20 transition-all duration-1000 ${
           visibleSections.has('categories') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Shop by Category
             </h2>
-            <p className="text-xl text-gray-400">Discover our curated collections</p>
+            <p className="text-lg sm:text-xl text-gray-400">Discover our curated collections</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
             {categories.map((category, index) => (
               <div 
                 key={index}
                 className="group cursor-pointer transform hover:scale-110 transition-all duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`w-full aspect-square bg-gradient-to-br ${category.gradient} rounded-3xl flex flex-col items-center justify-center p-6 hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300`}>
-                  <span className="text-4xl mb-4 group-hover:scale-125 transition-transform duration-300">
+                <div className={`w-full aspect-square bg-gradient-to-br ${category.gradient} rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300`}>
+                  <span className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3 md:mb-4 group-hover:scale-125 transition-transform duration-300">
                     {category.icon}
                   </span>
-                  <span className="text-white font-semibold text-center">{category.name}</span>
+                  <span className="text-white font-semibold text-center text-sm sm:text-base">{category.name}</span>
                 </div>
               </div>
             ))}
@@ -308,44 +308,44 @@ export default function EcommerceHomePage() {
       <section 
         id="products" 
         data-animate 
-        className={`py-20 bg-gray-900/50 transition-all duration-1000 ${
+        className={`py-12 sm:py-16 md:py-20 bg-gray-900/50 transition-all duration-1000 ${
           visibleSections.has('products') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Featured Products
             </h2>
-            <p className="text-xl text-gray-400">Handpicked items just for you</p>
+            <p className="text-lg sm:text-xl text-gray-400">Handpicked items just for you</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {featuredProducts.map((product, index) => (
               <div 
                 key={product.id}
-                className="group bg-gray-800/50 backdrop-blur-sm rounded-3xl p-6 hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
+                className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6 hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="text-6xl text-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="text-4xl sm:text-5xl md:text-6xl text-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
                   {product.image}
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">{product.name}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">{product.name}</h3>
                 <div className="flex items-center mb-3">
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`} />
+                      <Star key={i} className={`w-3 h-3 sm:w-4 sm:h-4 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`} />
                     ))}
                   </div>
-                  <span className="text-gray-400 text-sm ml-2">({product.reviews})</span>
+                  <span className="text-gray-400 text-xs sm:text-sm ml-2">({product.reviews})</span>
                 </div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
-                    <span className="text-2xl font-bold text-white">{product.price}</span>
-                    <span className="text-gray-400 line-through">{product.originalPrice}</span>
+                    <span className="text-xl sm:text-2xl font-bold text-white">{product.price}</span>
+                    <span className="text-sm sm:text-base text-gray-400 line-through">{product.originalPrice}</span>
                   </div>
                 </div>
-                <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-2xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 group-hover:scale-105">
+                <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 group-hover:scale-105 text-sm sm:text-base">
                   Add to Cart
                 </button>
               </div>
@@ -358,21 +358,21 @@ export default function EcommerceHomePage() {
       <section 
         id="video" 
         data-animate 
-        className={`py-20 transition-all duration-1000 ${
+        className={`py-12 sm:py-16 md:py-20 transition-all duration-1000 ${
           visibleSections.has('video') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 p-1">
-            <div className="bg-black rounded-3xl p-16 text-center">
-              <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 p-1">
+            <div className="bg-black rounded-2xl sm:rounded-3xl p-8 sm:p-12 md:p-16 text-center">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Experience Luxury
               </h2>
-              <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto">
                 Watch how our premium products are crafted with attention to every detail
               </p>
-              <button className="group bg-gradient-to-r from-purple-600 to-pink-600 w-24 h-24 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 mx-auto">
-                <Play className="w-8 h-8 text-white ml-1 group-hover:scale-125 transition-transform duration-300" />
+              <button className="group bg-gradient-to-r from-purple-600 to-pink-600 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 mx-auto">
+                <Play className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white ml-1 group-hover:scale-125 transition-transform duration-300" />
               </button>
             </div>
           </div>
@@ -383,35 +383,35 @@ export default function EcommerceHomePage() {
       <section 
         id="testimonials" 
         data-animate 
-        className={`py-20 bg-gray-900/50 transition-all duration-1000 ${
+        className={`py-12 sm:py-16 md:py-20 bg-gray-900/50 transition-all duration-1000 ${
           visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               What Our Customers Say
             </h2>
-            <p className="text-xl text-gray-400">Join thousands of satisfied customers</p>
+            <p className="text-lg sm:text-xl text-gray-400">Join thousands of satisfied customers</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-gray-800/50 backdrop-blur-sm rounded-3xl p-8 hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105"
+                className="bg-gray-800/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <Quote className="w-8 h-8 text-purple-400 mb-4" />
-                <p className="text-gray-300 mb-6 text-lg">{testimonial.content}</p>
+                <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400 mb-3 sm:mb-4" />
+                <p className="text-gray-300 mb-4 sm:mb-6 text-base sm:text-lg">{testimonial.content}</p>
                 <div className="flex items-center">
-                  <span className="text-3xl mr-4">{testimonial.avatar}</span>
+                  <span className="text-2xl sm:text-3xl mr-3 sm:mr-4">{testimonial.avatar}</span>
                   <div>
-                    <h4 className="text-white font-semibold">{testimonial.name}</h4>
-                    <p className="text-gray-400 text-sm">{testimonial.role}</p>
+                    <h4 className="text-white font-semibold text-sm sm:text-base">{testimonial.name}</h4>
+                    <p className="text-gray-400 text-xs sm:text-sm">{testimonial.role}</p>
                     <div className="flex text-yellow-400 mt-1">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-current" />
+                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
                       ))}
                     </div>
                   </div>
@@ -423,18 +423,18 @@ export default function EcommerceHomePage() {
       </section>
 
       {/* Newsletter */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-16 text-center">
-            <h2 className="text-5xl font-bold mb-4 text-white">Stay Updated</h2>
-            <p className="text-xl text-purple-100 mb-8">Get the latest deals and exclusive offers</p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+      <section className="py-12 sm:py-16 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 md:p-16 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-white">Stay Updated</h2>
+            <p className="text-lg sm:text-xl text-purple-100 mb-6 sm:mb-8">Get the latest deals and exclusive offers</p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md mx-auto">
               <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-2xl bg-white/20 backdrop-blur-sm text-white placeholder-purple-200 border border-white/30 focus:outline-none focus:border-white/50 transition-all duration-300"
+                className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-white/20 backdrop-blur-sm text-white placeholder-purple-200 border border-white/30 focus:outline-none focus:border-white/50 transition-all duration-300 text-sm sm:text-base"
               />
-              <button className="px-8 py-4 bg-white text-purple-600 font-semibold rounded-2xl hover:bg-gray-100 transition-all duration-300 hover:scale-105">
+              <button className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-purple-600 font-semibold rounded-xl sm:rounded-2xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 text-sm sm:text-base">
                 Subscribe
               </button>
             </div>
@@ -443,28 +443,28 @@ export default function EcommerceHomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 py-16">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                  <Zap className="w-6 h-6 text-white" />
+      <footer className="bg-gray-900 py-12 sm:py-16">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+            <div className="sm:col-span-2 md:col-span-1">
+              <div className="flex items-center space-x-2 mb-4 sm:mb-6">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                  <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   LUXE
                 </span>
               </div>
-              <p className="text-gray-400 mb-4">Your premium shopping destination for luxury products and exceptional service.</p>
+              <p className="text-gray-400 mb-4 text-sm sm:text-base">Your premium shopping destination for luxury products and exceptional service.</p>
             </div>
             
             {['Quick Links', 'Customer Service', 'Company'].map((title, index) => (
               <div key={title}>
-                <h3 className="text-white font-semibold mb-4">{title}</h3>
+                <h3 className="text-white font-semibold mb-3 sm:mb-4 text-base sm:text-lg">{title}</h3>
                 <ul className="space-y-2">
                   {['About Us', 'Contact', 'Privacy Policy', 'Terms of Service'].map((link) => (
                     <li key={link}>
-                      <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">{link}</a>
+                      <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base">{link}</a>
                     </li>
                   ))}
                 </ul>
@@ -472,8 +472,8 @@ export default function EcommerceHomePage() {
             ))}
           </div>
           
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-gray-400">&copy; 2025 LUXE. All rights reserved.</p>
+          <div className="border-t border-gray-800 pt-6 sm:pt-8 text-center">
+            <p className="text-gray-400 text-sm sm:text-base">&copy; 2025 LUXE. All rights reserved.</p>
           </div>
         </div>
       </footer>
