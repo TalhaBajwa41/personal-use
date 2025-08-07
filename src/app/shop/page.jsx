@@ -159,11 +159,11 @@ const ShopPage = () => {
     setCart(newCart);
     
     // Remove from cart after 3 seconds (for demo)
-    setTimeout(() => {
-      const updatedCart = new Set(cart);
-      updatedCart.delete(id);
-      setCart(updatedCart);
-    }, 3000);
+    // setTimeout(() => {
+    //   const updatedCart = new Set(cart);
+    //   updatedCart.delete(id);
+    //   setCart(updatedCart);
+    // }, 3000);
   };
 
   if (isLoading) {
