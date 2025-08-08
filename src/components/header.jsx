@@ -1,471 +1,369 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { 
-  Menu, X, Search, ShoppingBag, User, Heart, Bell, 
-  ChevronDown, Sun, Moon, Star, TrendingUp, Gift,
-  MapPin, Phone, Mail, Shield, Truck, Award
+  ShoppingBag, 
+  User, 
+  Heart, 
+  Search, 
+  Menu, 
+  X, 
+  ChevronDown,
+  Sun,
+  Moon,
+  Globe,
+  Bell,
+  Star
 } from 'lucide-react';
 
-export default function ModernHeader() {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [cartCount, setCartCount] = useState(3);
   const [searchQuery, setSearchQuery] = useState('');
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [cartCount, setCartCount] = useState(3);
+  const [wishlistCount, setWishlistCount] = useState(5);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Navigation items
-  const navItems = [
-    { name: 'Home', href: '/', hasDropdown: false },
-    { name: 'Shop', href: '/shop', hasDropdown: true, badge: 'New' },
-    { name: 'Categories', href: '/categories', hasDropdown: true },
-    { name: 'Deals', href: '/deals', hasDropdown: false, badge: 'Hot' },
-    { name: 'About', href: '/about', hasDropdown: false },
-    { name: 'Contact', href: '/contact', hasDropdown: false }
-  ];
-
-  const notifications = [
-    { id: 1, message: "Your order has been shipped!", time: "2m ago", unread: true },
-    { id: 2, message: "New sale: 50% off electronics", time: "1h ago", unread: true },
-    { id: 3, message: "Wishlist item now on sale", time: "3h ago", unread: false }
-  ];
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log('Searching for:', searchQuery);
-    setIsSearchOpen(false);
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
   };
 
+  const navigation = [
+    { 
+      name: 'Home', 
+      href: '/home',
+      current: true 
+    },
+    { 
+      name: 'Categories', 
+      href: '/categories',
+      dropdown: [
+        { name: 'Electronics', href: '/categories/electronics', icon: '📱' },
+        { name: 'Fashion', href: '/categories/fashion', icon: '👕' },
+        { name: 'Home & Living', href: '/categories/home', icon: '🏠' },
+        { name: 'Sports', href: '/categories/sports', icon: '⚽' },
+        { name: 'Books', href: '/categories/books', icon: '📚' }
+      ]
+    },
+    { 
+      name: 'Deals', 
+      href: '/deals',
+      badge: 'Hot'
+    },
+    { 
+      name: 'About', 
+      href: '/about' 
+    },
+    { 
+      name: 'Contact', 
+      href: '/contact' 
+    }
+  ];
+
+  const quickSearchSuggestions = [
+    'iPhone 15 Pro',
+    'Nike Air Max',
+    'MacBook Pro',
+    'Samsung TV',
+    'Gaming Chair'
+  ];
+
   return (
-    <div className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-300`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? isDarkMode 
+          ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl' 
+          : 'bg-white/95 backdrop-blur-md shadow-xl'
+        : isDarkMode
+          ? 'bg-gray-900/80'
+          : 'bg-white/80'
+    }`}>
       {/* Top Bar */}
-      <div className={`hidden lg:block ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'} border-b py-2 text-sm`}>
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-2">
-              <Phone className="w-4 h-4 text-blue-500" />
-              <span>+1 (555) 123-4567</span>
+      <div className={`border-b transition-colors ${
+        isDarkMode ? 'border-gray-800 bg-gray-800/50' : 'border-gray-100 bg-gray-50/50'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-between items-center py-2 text-sm">
+            <div className="flex items-center gap-6">
+              <span className={`flex items-center gap-1 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                <Globe className="w-4 h-4" />
+                Free shipping worldwide
+              </span>
+              <span className={`flex items-center gap-1 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                <Star className="w-4 h-4 text-yellow-500" />
+                4.9/5 Customer Rating
+              </span>
             </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="w-4 h-4 text-green-500" />
-              <span>support@store.com</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <MapPin className="w-4 h-4 text-red-500" />
-              <span>Free shipping worldwide</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-green-500">
-              <Truck className="w-4 h-4" />
-              <span>Free delivery on orders $50+</span>
-            </div>
-            <div className="flex items-center space-x-2 text-yellow-500">
-              <Award className="w-4 h-4" />
-              <span>Trusted by 10M+ customers</span>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={toggleDarkMode}
+                className={`p-1 rounded-full transition-colors ${
+                  isDarkMode 
+                    ? 'text-gray-300 hover:text-white hover:bg-gray-700' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
+                }`}
+              >
+                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
+              <select className={`text-sm bg-transparent border-none focus:outline-none ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                <option value="en">EN</option>
+                <option value="es">ES</option>
+                <option value="fr">FR</option>
+              </select>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Header */}
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? `${isDarkMode ? 'bg-gray-900/95 border-gray-800' : 'bg-white/95 border-gray-200'} backdrop-blur-md shadow-lg border-b` 
-          : `${isDarkMode ? 'bg-gray-900' : 'bg-white'}`
-      }`}>
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            
-            {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
-                  <Star className="w-6 h-6 text-white" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between py-4">
+          {/* Logo */}
+          <div className="flex items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-xl">S</span>
               </div>
-              <div className="hidden sm:block">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  NextStore
+              <div>
+                <h1 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                  ShopPro
                 </h1>
-                <p className="text-xs text-gray-500">Premium Shopping</p>
+                <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  Premium Store
+                </p>
               </div>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              {navItems.map((item) => (
-                <div key={item.name} className="relative group">
-                  <a
-                    href={item.href}
-                    className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-colors duration-200 ${
-                      isDarkMode 
-                        ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
-                    }`}
-                  >
-                    <span className="font-medium">{item.name}</span>
-                    {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
-                    {item.badge && (
-                      <span className="ml-2 px-2 py-1 text-xs bg-red-500 text-white rounded-full animate-pulse">
-                        {item.badge}
-                      </span>
-                    )}
-                  </a>
-                  
-                  {/* Dropdown Menu Placeholder */}
-                  {item.hasDropdown && (
-                    <div className={`absolute top-full left-0 mt-2 w-48 ${
-                      isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-                    } rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200`}>
-                      <div className="py-2">
-                        <a href="#" className={`block px-4 py-2 text-sm ${
-                          isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-                        }`}>Subcategory 1</a>
-                        <a href="#" className={`block px-4 py-2 text-sm ${
-                          isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-                        }`}>Subcategory 2</a>
-                        <a href="#" className={`block px-4 py-2 text-sm ${
-                          isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-                        }`}>Subcategory 3</a>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </nav>
-
-            {/* Right Side Actions */}
-            <div className="flex items-center space-x-2">
-              
-              {/* Search Button */}
-              <button
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className={`p-2 rounded-lg transition-colors duration-200 ${
-                  isDarkMode 
-                    ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                <Search className="w-5 h-5" />
-              </button>
-
-              {/* Dark Mode Toggle */}
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className={`hidden sm:flex p-2 rounded-lg transition-colors duration-200 ${
-                  isDarkMode 
-                    ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-
-              {/* Notifications */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowNotifications(!showNotifications)}
-                  className={`p-2 rounded-lg transition-colors duration-200 ${
-                    isDarkMode 
-                      ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  <Bell className="w-5 h-5" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                    {notifications.filter(n => n.unread).length}
-                  </span>
-                </button>
-
-                {/* Notifications Dropdown */}
-                {showNotifications && (
-                  <div className={`absolute top-full right-0 mt-2 w-80 ${
-                    isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-                  } rounded-lg shadow-xl border z-50`}>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-3">Notifications</h3>
-                      <div className="space-y-3 max-h-64 overflow-y-auto">
-                        {notifications.map((notification) => (
-                          <div
-                            key={notification.id}
-                            className={`p-3 rounded-lg ${
-                              isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
-                            } ${notification.unread ? 'border-l-4 border-blue-500' : ''}`}
-                          >
-                            <p className="text-sm">{notification.message}</p>
-                            <span className="text-xs text-gray-500">{notification.time}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Wishlist */}
-              <button className={`hidden sm:flex p-2 rounded-lg transition-colors duration-200 ${
-                isDarkMode 
-                  ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}>
-                <Heart className="w-5 h-5" />
-              </button>
-
-              {/* User Menu */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowUserMenu(!showUserMenu)}
-                  className={`hidden sm:flex p-2 rounded-lg transition-colors duration-200 ${
-                    isDarkMode 
-                      ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  <User className="w-5 h-5" />
-                </button>
-
-                {/* User Dropdown */}
-                {showUserMenu && (
-                  <div className={`absolute top-full right-0 mt-2 w-48 ${
-                    isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-                  } rounded-lg shadow-xl border z-50`}>
-                    <div className="py-2">
-                      <a href="/profile" className={`block px-4 py-2 text-sm ${
-                        isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-                      }`}>My Profile</a>
-                      <a href="/orders" className={`block px-4 py-2 text-sm ${
-                        isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-                      }`}>My Orders</a>
-                      <a href="/settings" className={`block px-4 py-2 text-sm ${
-                        isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-                      }`}>Settings</a>
-                      <hr className={`my-2 ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`} />
-                      <a href="/logout" className="block px-4 py-2 text-sm text-red-500 hover:bg-red-50">
-                        Sign Out
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Cart */}
-              <button className={`relative p-2 rounded-lg transition-colors duration-200 ${
-                isDarkMode 
-                  ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}>
-                <ShoppingBag className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center font-medium">
-                  {cartCount}
-                </span>
-              </button>
-
-              {/* Mobile Menu Toggle */}
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`lg:hidden p-2 rounded-lg transition-colors duration-200 ml-2 ${
-                  isDarkMode 
-                    ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
             </div>
           </div>
 
           {/* Search Bar */}
-          {isSearchOpen && (
-            <div className={`py-4 border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
-              <div className="relative max-w-lg mx-auto">
-                <input
-                  type="text"
-                  placeholder="Search products, brands, categories..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
-                  className={`w-full px-4 py-3 pl-12 pr-16 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                    isDarkMode 
-                      ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' 
-                      : 'bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-500'
-                  }`}
-                  autoFocus
-                />
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <button
-                  onClick={handleSearch}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-200"
-                >
-                  Search
-                </button>
-              </div>
+          <div className="hidden md:flex flex-1 max-w-2xl mx-8 relative">
+            <div className={`relative w-full transition-all duration-300 ${
+              isSearchFocused ? 'transform scale-105' : ''
+            }`}>
+              <input
+                type="text"
+                placeholder="Search for products, brands, and more..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                className={`w-full pl-12 pr-4 py-3 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  isDarkMode 
+                    ? 'bg-gray-800 text-white border border-gray-700 focus:border-blue-500' 
+                    : 'bg-gray-50 text-gray-900 border border-gray-200 focus:border-blue-500 focus:bg-white'
+                }`}
+              />
+              <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
+                isDarkMode ? 'text-gray-400' : 'text-gray-500'
+              }`} />
+              
+              {/* Search Suggestions */}
+              {isSearchFocused && (
+                <div className={`absolute top-full left-0 right-0 mt-2 py-4 rounded-2xl shadow-2xl border z-50 ${
+                  isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                }`}>
+                  <div className="px-4 mb-2">
+                    <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                      Popular Searches
+                    </p>
+                  </div>
+                  {quickSearchSuggestions.map((suggestion, index) => (
+                    <button
+                      key={index}
+                      className={`w-full px-4 py-2 text-left hover:bg-opacity-50 transition-colors ${
+                        isDarkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
+                      }`}
+                    >
+                      <Search className="w-4 h-4 inline-block mr-3 opacity-50" />
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </header>
-
-      {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
-        isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-      }`}>
-        <div 
-          className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
-          onClick={() => setIsMenuOpen(false)}
-        />
-        <div className={`absolute top-0 right-0 h-full w-80 max-w-full transform transition-transform duration-300 ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        } ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
-          
-          {/* Mobile Menu Header */}
-          <div className={`flex items-center justify-between p-4 border-b ${
-            isDarkMode ? 'border-gray-800' : 'border-gray-200'
-          }`}>
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Star className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-bold text-lg">NextStore</span>
-            </div>
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className={`p-2 rounded-lg ${
-                isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'
-              }`}
-            >
-              <X className="w-5 h-5" />
-            </button>
           </div>
 
-          {/* Mobile Menu Content */}
-          <div className="p-4">
-            {/* Mobile Search */}
-            <div className="mb-6">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
-                  className={`w-full px-4 py-3 pl-10 pr-12 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    isDarkMode 
-                      ? 'bg-gray-800 border-gray-700 text-white' 
-                      : 'bg-gray-50 border-gray-300'
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2">
+            {/* Notifications */}
+            <button className={`relative p-2 rounded-lg transition-colors duration-200 ${
+              isDarkMode 
+                ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+            }`}>
+              <Bell className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+            </button>
+
+            {/* Wishlist */}
+            <button className={`relative p-2 rounded-lg transition-colors duration-200 ${
+              isDarkMode 
+                ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+            }`}>
+              <Heart className="w-5 h-5" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-medium">
+                  {wishlistCount}
+                </span>
+              )}
+            </button>
+
+            {/* Cart */}
+                 <a href="" className={`relative p-2 rounded-lg transition-colors duration-200 ${
+              isDarkMode 
+                ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+            }`}>
+              <ShoppingBag className="w-5 h-5" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center font-medium animate-pulse">
+                  {cartCount}
+                </span>
+              )}
+            </a>
+
+            {/* User Profile */}
+            <button className={`relative p-2 rounded-lg transition-colors duration-200 ${
+              isDarkMode 
+                ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+            }`}>
+              <User className="w-5 h-5" />
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
+                isDarkMode 
+                  ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+              }`}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="hidden md:flex items-center gap-8 pb-4">
+          {navigation.map((item) => (
+            <div key={item.name} className="relative group">
+              <button
+                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                onMouseLeave={() => setActiveDropdown(null)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 font-medium relative ${
+                  item.current
+                    ? isDarkMode
+                      ? 'text-blue-400 bg-blue-900/20'
+                      : 'text-blue-600 bg-blue-50'
+                    : isDarkMode
+                      ? 'text-gray-300 hover:text-white hover:bg-gray-800'
+                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                {item.name}
+                {item.dropdown && <ChevronDown className="w-4 h-4" />}
+                {item.badge && (
+                  <span className="absolute -top-1 -right-1 px-2 py-0.5 text-xs bg-red-500 text-white rounded-full font-bold animate-bounce">
+                    {item.badge}
+                  </span>
+                )}
+              </button>
+
+              {/* Dropdown Menu */}
+              {item.dropdown && activeDropdown === item.name && (
+                <div 
+                  className={`absolute top-full left-0 mt-2 w-64 py-4 rounded-2xl shadow-2xl border z-40 ${
+                    isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
                   }`}
-                />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <button
-                  onClick={handleSearch}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                  onMouseEnter={() => setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  <Search className="w-4 h-4" />
-                </button>
-              </div>
+                  {item.dropdown.map((dropdownItem, index) => (
+                    <a
+                      key={index}
+                      href={dropdownItem.href}
+                      className={`flex items-center gap-3 px-4 py-3 transition-colors ${
+                        isDarkMode 
+                          ? 'text-gray-200 hover:bg-gray-700 hover:text-white' 
+                          : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                      }`}
+                    >
+                      <span className="text-lg">{dropdownItem.icon}</span>
+                      {dropdownItem.name}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className={`md:hidden border-t transition-colors ${
+          isDarkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'
+        }`}>
+          <div className="px-4 py-6 space-y-4">
+            {/* Mobile Search */}
+            <div className="relative mb-6">
+              <input
+                type="text"
+                placeholder="Search products..."
+                className={`w-full pl-10 pr-4 py-3 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  isDarkMode 
+                    ? 'bg-gray-800 text-white border border-gray-700' 
+                    : 'bg-gray-50 text-gray-900 border border-gray-200'
+                }`}
+              />
+              <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
+                isDarkMode ? 'text-gray-400' : 'text-gray-500'
+              }`} />
             </div>
 
             {/* Mobile Navigation */}
-            <nav className="space-y-2 mb-6">
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center justify-between px-4 py-3 rounded-lg transition-colors duration-200 ${
-                    isDarkMode 
-                      ? 'text-gray-300 hover:bg-gray-800 hover:text-white' 
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span className="font-medium">{item.name}</span>
-                  {item.badge && (
-                    <span className="px-2 py-1 text-xs bg-red-500 text-white rounded-full">
-                      {item.badge}
-                    </span>
-                  )}
-                </a>
-              ))}
-            </nav>
-
-            {/* Mobile User Actions */}
-            <div className={`space-y-2 pt-4 border-t ${
-              isDarkMode ? 'border-gray-800' : 'border-gray-200'
-            }`}>
+            {navigation.map((item) => (
               <a
-                href="/profile"
-                className={`flex items-center space-x-3 px-4 py-3 rounded-lg ${
-                  isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'
+                key={item.name}
+                href={item.href}
+                className={`block px-4 py-3 rounded-lg transition-colors font-medium ${
+                  item.current
+                    ? isDarkMode
+                      ? 'text-blue-400 bg-blue-900/20'
+                      : 'text-blue-600 bg-blue-50'
+                    : isDarkMode
+                      ? 'text-gray-300 hover:text-white hover:bg-gray-800'
+                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
                 }`}
               >
-                <User className="w-5 h-5" />
-                <span>My Account</span>
+                {item.name}
+                {item.badge && (
+                  <span className="ml-2 px-2 py-0.5 text-xs bg-red-500 text-white rounded-full font-bold">
+                    {item.badge}
+                  </span>
+                )}
               </a>
-              <a
-                href="/wishlist"
-                className={`flex items-center space-x-3 px-4 py-3 rounded-lg ${
-                  isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'
-                }`}
-              >
-                <Heart className="w-5 h-5" />
-                <span>Wishlist</span>
-              </a>
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg ${
-                  isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'
-                }`}
-              >
-                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-                <span>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</span>
-              </button>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* Demo Content to Show Scroll Effect */}
-      <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'} p-8`}>
-        <div className="container mx-auto">
-          <div className="text-center py-20">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Welcome to NextStore
-            </h1>
-            <p className={`text-xl mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Your premium shopping destination with modern design and responsive experience
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <div
-                  key={item}
-                  className={`p-6 rounded-xl ${
-                    isDarkMode ? 'bg-gray-800' : 'bg-white'
-                  } shadow-lg hover:shadow-xl transition-shadow duration-300`}
-                >
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                    <TrendingUp className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Feature {item}</h3>
-                  <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </header>
   );
-}
+};
+
+export default Header;
